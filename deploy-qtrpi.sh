@@ -44,19 +44,20 @@ fi
 if [[ $PREPARE_RPI ]]; then
     TARGET_USER=$(echo $TARGET_HOST | cut -d@ -f1)
     ssh $TARGET_HOST "sudo mkdir /usr/local/qt5pi ; sudo chown -R ${TARGET_USER}:users /usr/local/qt5pi"
-    ssh $TARGET_HOST 'sudo apt-get install -y apt-transport-https'
-    ssh $TARGET_HOST 'sudo apt-get install -y libts-0.0-0 libinput5 fontconfig'
+    ssh $TARGET_HOST "sudo apt-get install -y apt-transport-https"
     ssh $TARGET_HOST "sudo sh -c 'echo /usr/local/qt5pi/lib > /etc/ld.so.conf.d/99-qt5pi.conf'"
 
     # to fix which version of libEGL should be picked by Qt applications (/opt/vc rather than /usr/lib/....)
     # this has changed with Raspbian 'stretch'
     if [[ $TARGET_RASPBIAN == 'jessie' ]]; then
+        ssh $TARGET_HOST "sudo apt-get install -y libts-0.0-0 libinput5 fontconfig"
         ssh $TARGET_HOST "sudo sh -c 'rm /usr/lib/arm-linux-gnueabihf/libEGL.so.1.0.0 /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2.0.0'"
         ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so.1.0.0'"
         ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so.1'"
         ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2.0.0'"
         ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2'"
-    elif [[ $TARGET_RASPBIAN == 'stretch' ]]; then        
+    elif [[ $TARGET_RASPBIAN == 'stretch' ]]; then
+        ssh $TARGET_HOST "sudo apt-get install -y libts-0.0-0 fontconfig libpng12-0"
         ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libbrcmEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so'"
         ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libbrcmGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so'"
     fi
