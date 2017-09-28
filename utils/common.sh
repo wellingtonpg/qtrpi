@@ -56,6 +56,22 @@ validate_var_qtrpi_target_host() {
     fi
 }
 
+validate_var_qtrpi_qt_target_raspbian() {
+    if [[ $QTRPI_TARGET_RASPBIAN ]]; then
+        for RASPBIAN in 'jessie' 'stretch'; do
+            if [[ "$QTRPI_TARGET_RASPBIAN" == "$RASPBIAN" ]]; then
+                VALID=true
+            fi
+        done
+    else
+        VALID=true
+    fi
+
+    if [[ ! $VALID ]]; then
+        exit_error "Invalid QTRPI_TARGET_RASPBIAN value ($QTRPI_TARGET_RASPBIAN). Supported values: \n- jessie \n- stretch"
+    fi
+}
+
 check_env_vars() {
     : "${QTRPI_QT_VERSION:?Invalid environment variable, please export QTRPI_QT_VERSION.}"
     : "${QTRPI_TARGET_DEVICE:?Invalid environment variable: please export QTRPI_TARGET_DEVICE.}"
@@ -64,7 +80,7 @@ check_env_vars() {
     validate_var_qtrpi_qt_version
     validate_var_qtrpi_target_device
     validate_var_qtrpi_target_host
-    
+    validate_var_qtrpi_qt_target_raspbian
 }
 
 
@@ -72,6 +88,7 @@ ROOT=${QTRPI_ROOT-/opt/qtrpi}
 TARGET_DEVICE=${QTRPI_TARGET_DEVICE-'linux-rasp-pi2-g++'}
 QT_VERSION=${QTRPI_QT_VERSION-'5.7.0'}
 TARGET_HOST=$QTRPI_TARGET_HOST
+TARGET_RASPBIAN=${QTRPI_TARGET_RASPBIAN:-'stretch'}
 RASPBIAN_BASENAME='raspbian_latest'
 
 DEVICE_NAME=$(device_name $TARGET_DEVICE)

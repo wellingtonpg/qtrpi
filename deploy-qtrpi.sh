@@ -49,11 +49,17 @@ if [[ $PREPARE_RPI ]]; then
     ssh $TARGET_HOST "sudo sh -c 'echo /usr/local/qt5pi/lib > /etc/ld.so.conf.d/99-qt5pi.conf'"
 
     # to fix which version of libEGL should be picked by Qt applications (/opt/vc rather than /usr/lib/....)
-    ssh $TARGET_HOST "sudo sh -c 'rm /usr/lib/arm-linux-gnueabihf/libEGL.so.1.0.0 /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2.0.0'"
-    ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so.1.0.0'"
-    ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so.1'"
-    ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2.0.0'"
-    ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2'"
+    # this has changed with Raspbian 'stretch'
+    if [[ $TARGET_RASPBIAN == 'jessie' ]]
+        ssh $TARGET_HOST "sudo sh -c 'rm /usr/lib/arm-linux-gnueabihf/libEGL.so.1.0.0 /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2.0.0'"
+        ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so.1.0.0'"
+        ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so.1'"
+        ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2.0.0'"
+        ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so.2'"
+    elif [[ $TARGET_RASPBIAN == 'stretch' ]]        
+        ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libbrcmEGL.so /usr/lib/arm-linux-gnueabihf/libEGL.so'"
+        ssh $TARGET_HOST "sudo sh -c 'ln -sf /opt/vc/lib/libbrcmGLESv2.so /usr/lib/arm-linux-gnueabihf/libGLESv2.so'"
+    fi
 fi
 
 rsync -avz $OUTPUT_DIR $TARGET_HOST:/usr/local/
