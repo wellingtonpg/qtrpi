@@ -18,6 +18,10 @@ echo 1_2
 sudo lsmod | grep loop
 echo 1_3
 sudo chmod 0777 ${RASPBIAN_BASENAME}.img
+echo 1_4
+ls -la
+echo 1_5
+sudo chmod 0777 /dev/loop0
 echo 2
 sudo losetup -P /dev/loop0 ${RASPBIAN_BASENAME}.img
 echo 3
