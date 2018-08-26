@@ -17,15 +17,15 @@ sudo ls -la /dev/loop*
 echo 1_2
 sudo lsmod | grep loop
 echo 1_3
-sudo chmod 0777 ${RASPBIAN_BASENAME}.img
+sudo chmod 0766 ${RASPBIAN_BASENAME}.img
 echo 1_4
 ls -la
 echo 1_5
-sudo chmod 0777 /dev/loop0
+sudo chmod 0766 /dev/loop0
 echo 1_6
 sudo ls -la /dev/loop*
 echo 2
-sudo losetup -v -P /dev/loop0 ${RASPBIAN_BASENAME}.img
+sudo losetup -v /dev/loop0 ${RASPBIAN_BASENAME}.img
 echo 3
 sudo mkdir /mnt/raspbian
 echo 4
