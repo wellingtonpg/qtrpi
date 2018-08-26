@@ -12,6 +12,12 @@ ls -la
 
 echo 1
 sudo mknod /dev/loop0 b 7 0
+echo 1_1
+sudo ls -la /dev/loop*
+echo 1_2
+sudo lsmod | grep loop
+echo 1_3
+sudo chmod 0777 ${RASPBIAN_BASENAME}.img
 echo 2
 sudo losetup -P /dev/loop0 ${RASPBIAN_BASENAME}.img
 echo 3
