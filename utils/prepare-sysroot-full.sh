@@ -6,8 +6,10 @@ cd_root ;
 mkdir -p raspbian ; cd raspbian
 
 # Mount and extract the raspbian sysroot
-message 'Creating sysroot'
-echo ${RASPBIAN_BASENAME}.img
+message 'Creating sysroot - test'
+message "${RASPBIAN_BASENAME}.img"
+ls -la
+
 sudo losetup -P /dev/loop0 ${RASPBIAN_BASENAME}.img
 sudo mkdir /mnt/raspbian
 sudo mount /dev/loop0p2 /mnt/raspbian
