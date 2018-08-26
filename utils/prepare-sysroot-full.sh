@@ -10,9 +10,15 @@ message 'Creating sysroot - test'
 message "${RASPBIAN_BASENAME}.img"
 ls -la
 
+echo 1
+sudo mknod /dev/loop0 b 7 0
+echo 2
 sudo losetup -P /dev/loop0 ${RASPBIAN_BASENAME}.img
+echo 3
 sudo mkdir /mnt/raspbian
+echo 4
 sudo mount /dev/loop0p2 /mnt/raspbian
+echo 5
 
 # Copy all sysroot from .img
 mkdir sysroot-full
