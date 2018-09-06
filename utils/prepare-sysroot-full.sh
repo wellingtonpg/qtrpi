@@ -25,7 +25,7 @@ ls -la
 #echo 1_6
 #sudo ls -la /dev/loop*
 echo 2
-sudo losetup -P /dev/loop0 ${RASPBIAN_BASENAME}.img
+sudo losetup /dev/loop0 ${RASPBIAN_BASENAME}.img
 sudo ls -la /dev/loop*
 echo 3
 sudo mkdir /mnt/raspbian
