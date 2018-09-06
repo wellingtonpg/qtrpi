@@ -32,6 +32,11 @@ sudo mkdir /mnt/raspbian
 echo 4
 sudo mount /dev/loop0p2 /mnt/raspbian
 echo 5
+fdisk -l ${RASPBIAN_BASENAME}.img
+# offset=50331648 is obtained from above command from the start of second partition multiplied by 512
+# https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image
+sudo mount -v -o offset=50331648 -t ext4 raspbian_latest.img /mnt/raspbian
+echo 6
 
 # Copy all sysroot from .img
 mkdir sysroot-full
