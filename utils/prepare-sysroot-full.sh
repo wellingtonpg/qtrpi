@@ -11,7 +11,7 @@ message "${RASPBIAN_BASENAME}.img"
 ls -la
 
 #echo 1
-#sudo mknod /dev/loop0 b 7 0
+sudo mknod /dev/loop0 b 7 0
 #echo 1_1
 sudo ls -la /dev/loop*
 #echo 1_2
@@ -21,7 +21,7 @@ sudo chmod 0766 ${RASPBIAN_BASENAME}.img
 #echo 1_4
 ls -la
 #echo 1_5
-#sudo chmod 0766 /dev/loop0
+sudo chmod 0766 /dev/loop0
 #echo 1_6
 #sudo ls -la /dev/loop*
 echo 2
