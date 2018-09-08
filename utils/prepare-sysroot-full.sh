@@ -74,5 +74,7 @@ sudo umount sysroot-full/proc
 
 sudo chown -R $USER:$USER sysroot-full
 
+echo "Running sysroot-relativelinks.py"
 $UTILS_DIR/sysroot-relativelinks.py sysroot-full
+echo "Finished running sysroot-relativelinks.py"
 
