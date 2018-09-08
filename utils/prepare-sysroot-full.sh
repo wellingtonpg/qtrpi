@@ -44,6 +44,8 @@ sudo rsync -a /mnt/raspbian/ sysroot-full/
 
 sudo umount /mnt/raspbian
 sudo losetup -d /dev/loop0
+
+sudo apt-get update
 sudo apt-get -y install qemu-user-static
 sudo cp /usr/bin/qemu-arm-static sysroot-full/usr/bin/
 
