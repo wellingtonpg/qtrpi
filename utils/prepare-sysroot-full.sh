@@ -35,7 +35,8 @@ echo 5
 fdisk -l ${RASPBIAN_BASENAME}.img
 # offset=50331648 is obtained from above command from the start of second partition multiplied by 512
 # https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image
-sudo mount -v -o offset=50331648 -t ext4 ${RASPBIAN_BASENAME}.img /mnt/raspbian
+#sudo mount -v -o offset=50331648 -t ext4 ${RASPBIAN_BASENAME}.img /mnt/raspbian
+sudo mount -v -o offset=70254592 -t ext4 ${RASPBIAN_BASENAME}.img /mnt/raspbian
 echo 6
 
 # Copy all sysroot from .img
