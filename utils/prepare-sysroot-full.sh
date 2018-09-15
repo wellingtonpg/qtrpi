@@ -11,33 +11,33 @@ message "${RASPBIAN_BASENAME}.img"
 ls -la
 
 #echo 1
-sudo mknod /dev/loop0 b 7 0
+#sudo mknod /dev/loop0 b 7 0
 #echo 1_1
-sudo ls -la /dev/loop*
+#sudo ls -la /dev/loop*
 #echo 1_2
 #sudo lsmod | grep loop
 #echo 1_3
-sudo chmod 0766 ${RASPBIAN_BASENAME}.img
+#sudo chmod 0766 ${RASPBIAN_BASENAME}.img
 #echo 1_4
-ls -la
+#ls -la
 #echo 1_5
-sudo chmod 0766 /dev/loop0
+#sudo chmod 0766 /dev/loop0
 #echo 1_6
 #sudo ls -la /dev/loop*
-echo 2
-sudo losetup -v -P /dev/loop0 ${RASPBIAN_BASENAME}.img
-sudo ls -la /dev/loop*
-echo 3
+#echo 2
+#sudo losetup -v -P /dev/loop0 ${RASPBIAN_BASENAME}.img
+#sudo ls -la /dev/loop*
+#echo 3
 sudo mkdir /mnt/raspbian
-echo 4
-sudo mount /dev/loop0p2 /mnt/raspbian
-echo 5
+#echo 4
+#sudo mount /dev/loop0p2 /mnt/raspbian
+#echo 5
 fdisk -l ${RASPBIAN_BASENAME}.img
 # offset=50331648 is obtained from above command from the start of second partition multiplied by 512
 # https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image
 #sudo mount -v -o offset=50331648 -t ext4 ${RASPBIAN_BASENAME}.img /mnt/raspbian
 sudo mount -v -o offset=70254592 -t ext4 ${RASPBIAN_BASENAME}.img /mnt/raspbian
-echo 6
+#echo 6
 
 # Copy all sysroot from .img
 mkdir sysroot-full
@@ -79,3 +79,4 @@ echo "Running sysroot-relativelinks.py"
 $UTILS_DIR/sysroot-relativelinks.py sysroot-full
 echo "Finished running sysroot-relativelinks.py"
 
+ln -s /mnt/raspberry-rootfs/lib/arm-linux-gnueabihf /lib/
