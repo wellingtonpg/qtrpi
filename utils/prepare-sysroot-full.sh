@@ -44,7 +44,7 @@ mkdir sysroot-full
 sudo rsync -a /mnt/raspbian/ sysroot-full/
 
 sudo umount /mnt/raspbian
-sudo losetup -d /dev/loop0
+#sudo losetup -d /dev/loop0
 
 sudo apt-get update
 sudo apt-get -y install qemu-user-static
@@ -79,4 +79,4 @@ echo "Running sysroot-relativelinks.py"
 $UTILS_DIR/sysroot-relativelinks.py sysroot-full
 echo "Finished running sysroot-relativelinks.py"
 
-ln -s /mnt/raspberry-rootfs/lib/arm-linux-gnueabihf /lib/
+sudo ln -s /opt/qtrpi/raspbian/sysroot/lib/arm-linux-gnueabihf /lib/
