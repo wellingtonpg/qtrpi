@@ -17,7 +17,7 @@ ls -la
 #echo 1_2
 #sudo lsmod | grep loop
 #echo 1_3
-#sudo chmod 0766 ${RASPBIAN_BASENAME}.img
+sudo chmod 0766 ${RASPBIAN_BASENAME}.img
 #echo 1_4
 #ls -la
 #echo 1_5
